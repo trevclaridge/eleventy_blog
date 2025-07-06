@@ -3,7 +3,7 @@ title: Generating a PDF with GitHub Actions
 subtitle: Leveraging Pandoc to generate a high-quality PDF from Markdown source files.
 img: build_pdf_yml.png
 img_alt: A GitHub workflow YAML file with steps to utilize Pandoc.
-date: 2025-07-03
+date: 2025-07-06
 ---
 
 **!! For those looking for the technical solution I came to, my entire workflow yaml file can be found at the end, along with a link to the file in GitHub in case of any changes. !!**
@@ -40,7 +40,7 @@ To be honest, this was mostly my fault, as I've been naming my directories and f
 
 Enter the tool that makes this all possible. [Pandoc](https://pandoc.org/) is super powerful command-line tool that can convert files between a *huge* list of supported file types. I mean, just look at this visualizer of the possible permutations they have on their website:
 
-![A large node-graph showing all of the possible conversions available in Pandoc.](pandoc-file-conversions.png).
+![A large node-graph showing all of the possible conversions available in Pandoc.](pandoc-file-conversions.png)
 
 For our purposes, we are most interested in markdown to pdf, but you may also be interested in markdown to html, or docx, or epub, or a slew of Wiki markup formats.
 
@@ -60,7 +60,12 @@ With just a few changes, this action got me 80% of the way to my goal. It was th
 
 This one took about 7 years off my life, give or take a year.
 
-I was so sure that this was going to be an easy little enhancement I could add in to make my yaml file a little cleaner. No. Wrong. I'll spare all the details, but in the end I finally have an good 'ole [txt file at the root of my repo](https://github.com/trevclaridge/Writ-of-Rulers/blob/main/file_order.txt) that lists all of the file paths to the markdown files I want and in the order I want. See the "Get File Order" part of the workflow file below.
+I was so sure that this was going to be an easy little enhancement I could add in to make my yaml file a little cleaner. No. Wrong. I'll spare all details of all my failed attempts, but in the end I finally have an good 'ole [txt file at the root of my repo](https://github.com/trevclaridge/Writ-of-Rulers/blob/main/file_order.txt) that lists all of the file paths to the markdown files I want and in the order I want. See the "Get File Order" part of the workflow file below.
+
+The trick uses two key parts:
+
+1. The contents of the file is `cat`-ed out during the run. What was hardest here was ensuring that the multi-line contents, the paths to each markdown file, are formatted in a way that Pandoc will understand as an iput. This means removing the newlines and carriage returns from the output during the `cat` using the `tr` command as a filter, and replacing those characters with spaces. `| tr '\r\n' ' '`
+2. The output of the entire run step (the file paths seperated by spaces) is stored in a variable that is added to the `GITHUB_OUTPUT` environment variable so it can be referenced later. Remember to add an id to your run step so that this output can be used later (see mine, `get_file_order`, right after the step name).
 
 #### Additional Unicode Symbols
 
@@ -79,6 +84,32 @@ Unfortunately, the neither the `pandoc/latex` or `pandoc/extra` docker container
 This whole process was really starting to get to me, and I have to admit to giving up briefly around this time. I never actually solved this issue in the way that I wanted; that becomes irrelevant later, though, to wonderous cause.
 
 #### CSS styling
+
+Pandoc allows "intermediate" steps to be used when converted file formats to other formats. I'm not knowledgable of all the options available, but at least for PDF, you can specify an HTML intermediate step so that you can add a css argument to style the ultimate pdf output. [The official Pandoc documentation on this can be found here.](https://pandoc.org/MANUAL.html#:~:text=You%20can%20control%20the%20PDF%20style%20using%20variables%2C%20depending%20on%20the%20intermediate%20format%20used)
+
+Thankfully, this is the step that actually saved this whole project for me. In trying to find the right combination of pdf engine and arguments to get this to work, I again ran into the issue of trying to install additional packages to the docker container. I was trying to install [WeasyPrint](https://weasyprint.org/) to use as a pdf engine, as other pdf engines were complaining that they were not compatitble with HTML. This lead me to the `fpod/pandoc-weasyprint` docker container, [found here](https://hub.docker.com/r/fpod/pandoc-weasyprint). As the description intimates, this is a container built off the `pandoc/latex` image with WeasyPrint installed, as well as a few extras.
+
+So, I changed the docker image used in the GitHub action to this new container, and **everything just worked**.
+
+Pandoc allows for the `--css` argument, which just looks for a CSS file to use for styling (`--css="styles.css"`). Importantly, you also need ensure that your output filetype is html (`--to=html`), but your output filename ends with .pdf (`--output="output_file.pdf"`). You will also want to ensure that Pandoc tries to use WeasyPrint to generate your pdf (`--pdf-engine=weasyprint`).
+
+The default styling on my first successful run actually came out very pretty. I'm not clear if that is base WeasyPrint or if the docker container has a default css file defined. The only things I currently have changed is a slight increase to the line height of paragraph and list item elements.
+
+*And! This new setup even fixed the unicode character issues I was having before!*
+
+### Pandoc End
+
+In the end, I'm totally happy with the output I've achieved with the current action. Now we just need to upload that pdf document in a way that makes it easy to access.
+
+## Upload and Release Artifacts
+
+These two steps are luckly pretty much standard fare. You actually likely don't even need both; if you're going to choose between the two, I'd recommmend the Upload PDF as Release step, as that allows downloading the pdf directly, instead of compressed in a zip archive.
+
+The only issue I ran into at this stage was ensuring that there was a unique "tag" for each release. To make things simple, I'm just using the run number provided by the GitHub runner; this number ticks up for each run. I'm also appending this number to the file name and release name so that it is easier to identify different versions of the file. You may want to make this tag construction more nuanced, perhaps with semantic version, but just using the run number works for me for now. Finally, I add the `makeLatest` flag to the most recent run; again probably not necessary with a fancier versioning system, but works for simple use.
+
+A new release is generated on each run per this workflow, though you could specify more specific releases in the `on` argument at the beginning of the workflow file.
+
+[This link automatically redirects to the most recent version of the final output file](https://github.com/trevclaridge/Writ-of-Rulers/releases/latest). You can achieve this by adding "/releases/lastest" to your GitHub repo's url once everything is set up.
 
 ## The Final YAML
 
