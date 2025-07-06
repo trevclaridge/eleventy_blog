@@ -56,7 +56,7 @@ The time you take to respond, or even read the message, is entirely up to you. O
 
 You can map the ideas of sync and async to phone plans: Talk is sync, Text is async. Play-by-post games are *built* on the idea of async communication because that's basically all there is for posting online. Texting, posting on forums, commenting on YouTube videos, Discord messaging--that's *all* async.
 
-I'm spending a lot wordcount drilling in a on a concept that the world at large already understands, just might not have the name for, because it's really important for the next word phrase on our agenda, the one that kind of ties to "async" and "instant messaging" together.
+I'm spending a lot word count drilling in a on a concept that the world at large already understands, just might not have the name for, because it's really important for the next word phrase on our agenda, the one that kind of ties to "async" and "instant messaging" together.
 
 ### specifically designed
 

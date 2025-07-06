@@ -12,7 +12,7 @@ date: 2025-07-06
 
 [In the post before this one](../Using_GitHub_To_Host_My_TTRPG_Design_Project), I talked a bit about my process and reasoning in migrating my notes on my current game design project to GitHub. This comes with a variety of benefits, one of which led me down a rabbit hole that, admittedly, shaved a few years off my life.
 
-One of the main problems I foresaw with my migrating all my game notes to GitHub is that sharing the *whole* game with folks would be a cumbersome. It's easy enough for me to link people my repo, but the repo is a complex tree of markdown files that is difficult to parse through. I like to have my writing fairly silo'd, with each mechanic having its own markdown file. This just helps me mentally separate out the logical pieces, as well as making it easier to see changes in the git diff viewer. There is no logical "beginning" for where to begin reading; of course, I could put a note to that effect in the README and direct readers' eyes towards the relevant directories, but that is a lot to ask of someone already being very generious investing time in reading a *draft* of a game. So, I resolved to make that process easier by finding a way to join all of my various markdown files into a single PDF, via an automated process in a GitHub action.
+One of the main problems I foresaw with my migrating all my game notes to GitHub is that sharing the *whole* game with folks would be a cumbersome. It's easy enough for me to link people my repo, but the repo is a complex tree of markdown files that is difficult to parse through. I like to have my writing fairly silo'd, with each mechanic having its own markdown file. This just helps me mentally separate out the logical pieces, as well as making it easier to see changes in the git diff viewer. There is no logical "beginning" for where to begin reading; of course, I could put a note to that effect in the README and direct readers' eyes towards the relevant directories, but that is a lot to ask of someone already being very generous investing time in reading a *draft* of a game. So, I resolved to make that process easier by finding a way to join all of my various markdown files into a single PDF, via an automated process in a GitHub action.
 
 ## Failed Attempts
 
@@ -24,7 +24,7 @@ For those who might find this post in their attempts in the future, however, I'm
 
 This was a promising lead because other GitHub actions linked to it after being deprecated. It also supports styling with CSS, which was a big deal for me (more on that later).
 
-If I'm remembering correctly, my big issue with this option was that I couldn't specific an ordering to the markdown files; the only options were path-to-specific-file or path-to-directory-with-files. For my project, I really need my pdf to join the markdown files in a specific sequence, or mechanics and explainations of rules could wind up mixed in with other non-relevant information, leading to confusion. And, thus I moved on to find another tool.
+If I'm remembering correctly, my big issue with this option was that I couldn't specific an ordering to the markdown files; the only options were path-to-specific-file or path-to-directory-with-files. For my project, I really need my pdf to join the markdown files in a specific sequence, or mechanics and explanations of rules could wind up mixed in with other non-relevant information, leading to confusion. And, thus I moved on to find another tool.
 
 ### [Publish-Markdown-As-PDF](https://github.com/marketplace/actions/publish-markdown-as-pdf)
 
@@ -32,7 +32,7 @@ This is one of the actions that linked to Markdown-to-PDF. Right away, I noticed
 
 The problem for this action was, unfortunately, that it had a lot of trouble recognizing the sources I specified!
 
-![A meme of Captain Picard from Star Trek faceplaming.](picard-meme-facepalm.webp)
+![A meme of Captain Picard from Star Trek facepalming.](picard-meme-facepalm.webp)
 
 To be honest, this was mostly my fault, as I've been naming my directories and files with spaces included (I like the way it looks 🤷). This action didn't seem to understand what I wanted to include, regardless of quotes or formatting. So, we move on again.
 
@@ -44,7 +44,7 @@ Enter the tool that makes this all possible. [Pandoc](https://pandoc.org/) is su
 
 For our purposes, we are most interested in markdown to pdf, but you may also be interested in markdown to html, or docx, or epub, or a slew of Wiki markup formats.
 
-Pandoc also allows for specifying the ordering of file inputs, horray!
+Pandoc also allows for specifying the ordering of file inputs, hooray!
 
 There is a popular [Pandoc GitHub Action](https://github.com/pandoc/pandoc-action-example), which provides a number of docker containers for which to run Pandoc. I ran the gambit of the available docker containers in my efforts, but reasons I'll explain in a bit, I actually had to switch to a community docker that was built off the "official" containers.
 
@@ -64,8 +64,8 @@ I was so sure that this was going to be an easy little enhancement I could add i
 
 The trick uses two key parts:
 
-1. The contents of the file is `cat`-ed out during the run. What was hardest here was ensuring that the multi-line contents, the paths to each markdown file, are formatted in a way that Pandoc will understand as an iput. This means removing the newlines and carriage returns from the output during the `cat` using the `tr` command as a filter, and replacing those characters with spaces. `| tr '\r\n' ' '`
-2. The output of the entire run step (the file paths seperated by spaces) is stored in a variable that is added to the `GITHUB_OUTPUT` environment variable so it can be referenced later. Remember to add an id to your run step so that this output can be used later (see mine, `get_file_order`, right after the step name).
+1. The contents of the file is `cat`-ed out during the run. What was hardest here was ensuring that the multi-line contents, the paths to each markdown file, are formatted in a way that Pandoc will understand as an input. This means removing the newlines and carriage returns from the output during the `cat` using the `tr` command as a filter, and replacing those characters with spaces. `| tr '\r\n' ' '`
+2. The output of the entire run step (the file paths separated by spaces) is stored in a variable that is added to the `GITHUB_OUTPUT` environment variable so it can be referenced later. Remember to add an id to your run step so that this output can be used later (see mine, `get_file_order`, right after the step name).
 
 #### Additional Unicode Symbols
 
@@ -81,13 +81,13 @@ So, if I'm understanding this correctly (which, it is entirely possible that I'm
 
 Unfortunately, the neither the `pandoc/latex` or `pandoc/extra` docker containers have this package included. I went down the rabbit hole of trying to add the package the containers (still don't know how to do this, and would like to learn), as well as trying to install Pandoc and related packages directly into the GitHub runner.
 
-This whole process was really starting to get to me, and I have to admit to giving up briefly around this time. I never actually solved this issue in the way that I wanted; that becomes irrelevant later, though, to wonderous cause.
+This whole process was really starting to get to me, and I have to admit to giving up briefly around this time. I never actually solved this issue in the way that I wanted; that becomes irrelevant later, though, to wondrous cause.
 
 #### CSS styling
 
-Pandoc allows "intermediate" steps to be used when converted file formats to other formats. I'm not knowledgable of all the options available, but at least for PDF, you can specify an HTML intermediate step so that you can add a css argument to style the ultimate pdf output. [The official Pandoc documentation on this can be found here.](https://pandoc.org/MANUAL.html#:~:text=You%20can%20control%20the%20PDF%20style%20using%20variables%2C%20depending%20on%20the%20intermediate%20format%20used)
+Pandoc allows "intermediate" steps to be used when converted file formats to other formats. I'm not knowledgeable of all the options available, but at least for PDF, you can specify an HTML intermediate step so that you can add a css argument to style the ultimate pdf output. [The official Pandoc documentation on this can be found here.](https://pandoc.org/MANUAL.html#:~:text=You%20can%20control%20the%20PDF%20style%20using%20variables%2C%20depending%20on%20the%20intermediate%20format%20used)
 
-Thankfully, this is the step that actually saved this whole project for me. In trying to find the right combination of pdf engine and arguments to get this to work, I again ran into the issue of trying to install additional packages to the docker container. I was trying to install [WeasyPrint](https://weasyprint.org/) to use as a pdf engine, as other pdf engines were complaining that they were not compatitble with HTML. This lead me to the `fpod/pandoc-weasyprint` docker container, [found here](https://hub.docker.com/r/fpod/pandoc-weasyprint). As the description intimates, this is a container built off the `pandoc/latex` image with WeasyPrint installed, as well as a few extras.
+Thankfully, this is the step that actually saved this whole project for me. In trying to find the right combination of pdf engine and arguments to get this to work, I again ran into the issue of trying to install additional packages to the docker container. I was trying to install [WeasyPrint](https://weasyprint.org/) to use as a pdf engine, as other pdf engines were complaining that they were not compatible with HTML. This lead me to the `fpod/pandoc-weasyprint` docker container, [found here](https://hub.docker.com/r/fpod/pandoc-weasyprint). As the description intimates, this is a container built off the `pandoc/latex` image with WeasyPrint installed, as well as a few extras.
 
 So, I changed the docker image used in the GitHub action to this new container, and **everything just worked**.
 
@@ -103,15 +103,17 @@ In the end, I'm totally happy with the output I've achieved with the current act
 
 ## Upload and Release Artifacts
 
-These two steps are luckly pretty much standard fare. You actually likely don't even need both; if you're going to choose between the two, I'd recommmend the Upload PDF as Release step, as that allows downloading the pdf directly, instead of compressed in a zip archive.
+These two steps are luckily pretty much standard fare. You actually likely don't even need both; if you're going to choose between the two, I'd recommend the Upload PDF as Release step, as that allows downloading the pdf directly, instead of compressed in a zip archive.
 
 The only issue I ran into at this stage was ensuring that there was a unique "tag" for each release. To make things simple, I'm just using the run number provided by the GitHub runner; this number ticks up for each run. I'm also appending this number to the file name and release name so that it is easier to identify different versions of the file. You may want to make this tag construction more nuanced, perhaps with semantic version, but just using the run number works for me for now. Finally, I add the `makeLatest` flag to the most recent run; again probably not necessary with a fancier versioning system, but works for simple use.
 
 A new release is generated on each run per this workflow, though you could specify more specific releases in the `on` argument at the beginning of the workflow file.
 
-[This link automatically redirects to the most recent version of the final output file](https://github.com/trevclaridge/Writ-of-Rulers/releases/latest). You can achieve this by adding "/releases/lastest" to your GitHub repo's url once everything is set up.
+[This link automatically redirects to the most recent version of the final output file](https://github.com/trevclaridge/Writ-of-Rulers/releases/latest). You can achieve this by adding "/releases/latest" to your GitHub repo's url once everything is set up.
 
 ## The Final YAML
+
+[GitHub link to the version of this file I'm currently using](https://github.com/trevclaridge/Writ-of-Rulers/blob/main/.github/workflows/build-pdf.yml) (may be different than what is found below).
 
 ```yaml
 # This action generates a PDF from all of the game's writing.
@@ -168,5 +170,3 @@ jobs:
           name: "Writ of Rulers v${{ github.run_number }}"
           makeLatest: true
 ```
-
-[GitHub link to the version of this file I'm currently using](https://github.com/trevclaridge/Writ-of-Rulers/blob/main/.github/workflows/build-pdf.yml)

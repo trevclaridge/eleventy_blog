@@ -6,7 +6,7 @@ img_alt: A pile of scattered papers and notes from the design of of Writ of Rule
 date: 2025-07-04
 ---
 
-Inspired by [this video about the benefits of storing work as plaintext from No Boilerplate on YouTube](https://youtu.be/WgV6M1LyfNY?si=Tza_82vvo6qPo_DC) (highly recommend giving it a watch), I recently moved all my various notes for my game *Writ of Rulers* to a [Git repository hosted on GitHub](https://github.com/trevclaridge/Writ-of-Rulers). For this post, I wanted to talk a little bit about what movitated me to do so, what kinds of issues you might face in the process, and then how I plan to continue to utilize the benefits this new system provides me. If I can pique your interest towards possibly following suit, that's a nice bonus!
+Inspired by [this video about the benefits of storing work as plaintext from No Boilerplate on YouTube](https://youtu.be/WgV6M1LyfNY?si=Tza_82vvo6qPo_DC) (highly recommend giving it a watch), I recently moved all my various notes for my game *Writ of Rulers* to a [Git repository hosted on GitHub](https://github.com/trevclaridge/Writ-of-Rulers). For this post, I wanted to talk a little bit about what motivated me to do so, what kinds of issues you might face in the process, and then how I plan to continue to utilize the benefits this new system provides me. If I can pique your interest towards possibly following suit, that's a nice bonus!
 
 ## What is Git?
 
@@ -16,13 +16,13 @@ Git is a "version control system," or VCS for short. Basically, Git tracks *chan
 
 The video linked above talks a bit about why programmers use Git. Git has become something of an industry standard for software development because the features Git provides lend themselves so perfectly to coding. Software development involves a lot of time reading and writing plain text; most software is just a whole bunch of loose text files with weird file extensions that all get combined together in a complicated compilation process to produce the technology we use daily. Developers also need to have very clear understandings of how the softwares we work on change over time. If there is a bug in version 2 that wasn't in version 1, we need to know what changed between those two versions so we can identify what introduced the bug. Git also allows us to be very careful about what new code is being introduced in real-time: if I want to add some code to the main code base, another developer takes a look at my Git changes to ensure I didn't miss anything or introduce any obvious bugs--this process is called a "code review." If my Git changes look good and get a thumbs up from the reviewer, then I can merge those changes with the main code. Merging is just another text change tracked in Git, so if my code did introduce a bug, we can super easily revert the main code to the version right before my code was merged in.
 
-These are the main features of Git, but, honestly, Git is kind of magic. There are a whole bunch of other features that will be useful for any number of specialized projects, but really you only need to know a few basic commands to get *a lot* done. In fact, if you start to dig into Git, you may run across some jokes around how only like 4 commands are used by a vast majority of people; the "Git is kind of magic" phrase from before is something I heard verbatum from my college computer science professor.
+These are the main features of Git, but, honestly, Git is kind of magic. There are a whole bunch of other features that will be useful for any number of specialized projects, but really you only need to know a few basic commands to get *a lot* done. In fact, if you start to dig into Git, you may run across some jokes around how only like 4 commands are used by a vast majority of people; the "Git is kind of magic" phrase from before is something I heard verbatim from my college computer science professor.
 
 If Git sounds interesting to you, just doing a quick Google or YouTube search for "Git Basics" will provide you with a wealth of cool tutorials.
 
 ## What about GitHub?
 
-GitHub is a whole megaton of things, but for the purposes of this post, is just an online tool you can use to easily externally store your Git changes (aka your Git "repository"). I'll talk more about the GitHub a little later as I talk about my reasoning for transfering my game notes there, but for now, just know that GitHub basically provides a location to host your files and change history and has a nice UI for navigating those files and version history, managing changes and triggering automated workflows on the introduction of new changes, and making your files and history public to allow easier collaboration with others (GitHub and other sites like it are critical to the Open Source community).
+GitHub is a whole megaton of things, but for the purposes of this post, is just an online tool you can use to easily externally store your Git changes (aka your Git "repository"). I'll talk more about the GitHub a little later as I talk about my reasoning for transferring my game notes there, but for now, just know that GitHub basically provides a location to host your files and change history and has a nice UI for navigating those files and version history, managing changes and triggering automated workflows on the introduction of new changes, and making your files and history public to allow easier collaboration with others (GitHub and other sites like it are critical to the Open Source community).
 
 Below you can see a pic of the home page of my GitHub repository for *Writ of Rulers*.
 
@@ -36,12 +36,12 @@ Okay, all the above was a lot more than I expected to write about Git and its us
 
 I adopted Git for my project because I was struggling with making a cohesive and useful system to track all the different changes and iterations of my game I was producing. Iteration is hugely important thing for game design (consider: playtesting) and I really wanted to keep a record of how iteration was affecting the development of my game. This interesting is largely inspired by [this podcast episode on iteration by Design Games](https://designgames.simplecast.com/episodes/42), as well as my real life friends that also design games, who keep all of the different versions of their games in hard copy; I'm always jealous when we meet up and they pull out newer and older versions of character sheets and such for us to compare. Having a record of changes gives a great view into the design process and can aid further design work by bringing into focus thoughts and ideas that may have been forgotten otherwise (game design can be a long process and memories have a funny way of disappearing over time).
 
-In addition to version tracking, hosting on GitHub also has the basic benefit of just coalescing a bunch of scattered writing into one central, easily shareable place. For a long time now, I've been using [Obsidian](https://obsidian.md/) to write my game, and while I do like it as just a barebones text editor with some useful features, it has some of the same problems my other file systems have in that I have to record changes manually (by making a new file with something like "v2" in the title), and if I ever want to share some piece of writing with anyone else, I have to go through some sort of multi step process:
+In addition to version tracking, hosting on GitHub also has the basic benefit of just coalescing a bunch of scattered writing into one central, easily shareable place. For a long time now, I've been using [Obsidian](https://obsidian.md/) to write my game, and while I do like it as just a bare bones text editor with some useful features, it has some of the same problems my other file systems have in that I have to record changes manually (by making a new file with something like "v2" in the title), and if I ever want to share some piece of writing with anyone else, I have to go through some sort of multi step process:
 
 1. Take a screenshot
 
 	- not super useful if they want to copy-paste.
-	- if the text is too long for a single screenshot, that means sending mutliple photos, which is just cumbersome
+	- if the text is too long for a single screenshot, that means sending multiple photos, which is just cumbersome
 
 2. Copy-paste the text from Obsidian
 
@@ -57,7 +57,7 @@ In addition to version tracking, hosting on GitHub also has the basic benefit of
 
 None of these are horribly inconvenient, and I use any combination of all 3 of them during daily work, but it is *just* annoying enough in combination of the version issues for me to start thinking about alternatives. Enter Git and GitHub, basically.
 
-Using Git automatically gets me the version control I want, and should I ever want to share a piece of writing with anyone, I need only send them a link to that file's specific GitHub page. Importantly, I'm using the same markdown language to write the game, which GitHub convienently renders straight to page in a pleasent way, so the other person doesn't need to do anything special to view the writing; it's a quick copy-paste of a url for me, and single click for them.
+Using Git automatically gets me the version control I want, and should I ever want to share a piece of writing with anyone, I need only send them a link to that file's specific GitHub page. Importantly, I'm using the same markdown language to write the game, which GitHub conveniently renders straight to page in a pleasant way, so the other person doesn't need to do anything special to view the writing; it's a quick copy-paste of a url for me, and single click for them.
 
 Below is an example of how these files are rendered:
 
@@ -83,7 +83,7 @@ This whole ecosystem works as well it does for me because I'm only barely in the
 
 Another thing that was brought up by a friend is GitHub's lack of a direct "suggesting" mechanism. Now, GitHub *does* have a whole slew of tools for conversations and suggestions in the forms of GitHub Discussions and the conversations allowed on Pull Requests, but those come with some added nuance that might put off some people who might be looking to go through a more thorough editing process on GitHub.
 
-- **Conversations** act kind of like forum posts. People can create new threads, in which you can discuss any number of things relating to the repo, with a bunch of built in features. The only downside from an editing perspective is that these conversations are not happening right on the source like you might find in the Suggesting mode of Google Docs or similar. Instead, if you'd like to discuss specific sections for grammer, word choice, or anything else, you will need to quote that section and perhaps add a link to it.
+- **Conversations** act kind of like forum posts. People can create new threads, in which you can discuss any number of things relating to the repo, with a bunch of built in features. The only downside from an editing perspective is that these conversations are not happening right on the source like you might find in the Suggesting mode of Google Docs or similar. Instead, if you'd like to discuss specific sections for grammar, word choice, or anything else, you will need to quote that section and perhaps add a link to it.
 
 ![An example Discussion on the Writ of Rulers Github repo describing a possible change to the Sovereignty resource name](writ-of-rulers-github-discussion.png)
 
