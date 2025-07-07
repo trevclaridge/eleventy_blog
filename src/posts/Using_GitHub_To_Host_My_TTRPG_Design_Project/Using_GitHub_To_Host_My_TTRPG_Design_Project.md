@@ -4,6 +4,9 @@ subtitle: Getting organized and tracking the iterations of my game with Git!
 img: writ-of-rulers-github-notes.png
 img_alt: A pile of scattered papers and notes from the design of of Writ of Rulers.
 date: 2025-07-04
+tags: 
+  - ttrpgs
+  - development
 ---
 
 Inspired by [this video about the benefits of storing work as plaintext from No Boilerplate on YouTube](https://youtu.be/WgV6M1LyfNY?si=Tza_82vvo6qPo_DC) (highly recommend giving it a watch), I recently moved all my various notes for my game *Writ of Rulers* to a [Git repository hosted on GitHub](https://github.com/trevclaridge/Writ-of-Rulers). For this post, I wanted to talk a little bit about what motivated me to do so, what kinds of issues you might face in the process, and then how I plan to continue to utilize the benefits this new system provides me. If I can pique your interest towards possibly following suit, that's a nice bonus!

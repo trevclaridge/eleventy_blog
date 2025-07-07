@@ -1,11 +1,17 @@
 ---
-title: trevclaridge.com blog archive
-layout: 'base.njk'
+title: Tagged {{ tag }}
+layout: base.njk
+pagination:
+  data: collections
+  size: 1
+  alias: tag
+permalink: /tags/{{ tag }}/
 ---
 
-<h1>Archive</h1>
+<h1>Tagged “{{ tag }}”</h1>
 <ul class="archive-posts">
-    {% for post in collections.post | reverse %}
+    {% set taglist = collections[ tag ] %}
+    {% for post in taglist | reverse %}
         <li class="post-card archive">
             <a href="{{ post.url }}">
                 <div class="post-card-details">

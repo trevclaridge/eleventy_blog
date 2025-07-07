@@ -326,16 +326,28 @@ body {
 }
 
 .article-subtitle {
+  margin: 0;
   color: var(--text-lighter-color);
   text-align: center;
-  margin-block-start: 1em;
   font-style: italic;
 }
 
+.article-tags {
+  margin: 0;
+  text-align: center;
+  list-style-type: none;
+}
+
+.article-tag {
+  margin-inline: 10px;
+  display: inline-block;
+}
+
 .article-date-created {
+  margin-block-start: 0;
+  margin-block-end: 1em;
   color: var(--text-lighter-color);
   text-align: center;
-  margin-block-end: 2em;
 }
 
 .article-image {
