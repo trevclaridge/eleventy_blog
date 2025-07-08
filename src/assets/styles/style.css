@@ -249,6 +249,10 @@ body {
   text-decoration-color: var(--link-color);
 }
 
+.post-card .article-tag a {
+  font-size: 2rem;
+}
+
 @media (min-width: 800px) {
   .post-card a {
     display: flex;
