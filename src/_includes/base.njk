@@ -1,25 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="The personal blog website of Trevor Claridge.">
-        <meta name="keywords" content="Tabletop Role-playing Games, Game Design, Software Development, Blog">
-        <meta name="author" content="Trevor Claridge">
-        <meta property="og:site_name" content="trevclaridge.com"/>
-        <meta property="og:title" content="{% if page.url =="/" %}Trevor Claridge | trevclaridge.com{% else %}{{ title }}{% endif %}"/>
-        <meta property="og:description" content="{% if page.url =="/" %}The personal blog website of Trevor Claridge.{% else %}{{ subtitle }}{% endif %}"/>
-        <meta property="og:type" content="website"/>
-        <meta property="og:url" content="https:/trevclaridge.com{{ page.url }}"/>
-        <meta property="og:image" content="{% if page.url =="/" %}https://trevclaridge.com/assets/images/logo_marbled.svg{% else %}https://trevclaridge.com{{ page.url }}{{ img }}{% endif %}"/>
-        <meta property="og:image:secure_url" content="{% if page.url =="/" %}https://trevclaridge.com/assets/images/logo_marbled.svg{% else %}https://trevclaridge.com{{ page.url }}{{ img }}{% endif %}"/>
-        <meta property="og:image:alt" content="{% if page.url =="/" %}Trevor Claridge logo{% else %}{{ img_alt }}{% endif %}"/>
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:image:src" content="{% if page.url =="/" %}https://trevclaridge.com/assets/images/logo_marbled.svg{% else %}https://trevclaridge.com{{ page.url }}{{ img }}{% endif %}">
-        <link rel="stylesheet" href="/assets/styles/style.css">
-        <link rel="stylesheet" href="/assets/styles/prism.css">
-        <link rel="icon" href="/assets/images/logo_marbled.svg">
+        {% include 'meta_tags.njk' %}
         <title>{{ title }}</title>
+        <link rel="stylesheet" href="/assets/styles/style.css"/>
+        <link rel="stylesheet" href="/assets/styles/prism.css"/>
+        <link rel="icon" href="/assets/images/logo_marbled.svg"/>
     </head>
     <body>
         <div class="root-body">
