@@ -2,7 +2,7 @@
 title: Designing a dumb TTRPG that nobody will play, Devlog 1
 subtitle: What in the heck is this game anyway?
 img: kingdoms_map.png
-img_alt: An illustrated map overlayed with the Kingdoms in the Background logo.
+img_alt: An illustrated map overlaid with the Kingdoms in the Background logo.
 date: 2024-06-27
 ---
 
