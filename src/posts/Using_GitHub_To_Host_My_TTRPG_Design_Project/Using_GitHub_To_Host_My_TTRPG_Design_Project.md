@@ -71,6 +71,14 @@ Compare that to the file source text (seen by clicking the "Code" option towards
 
 [Link to the above](https://github.com/trevclaridge/Writ-of-Rulers/blob/main/Core%20Mechanics/Rounds/Rounds.md?plain=1).
 
+## Usability
+
+This is a later edit to talk about the ease of use for on-the-fly editing to the game text. One of my experiences when it comes to game design is that I will be out-and-about doing errands when I suddenly get struck with a random idea that I wish to jot down for later reference. This could be any odd thing, but generally it's just a few bullet points to remind me of the thought so I can flesh it out later.
+
+With Obsidian, this is easy: just create a new note or add to an existing one. This worked well for me (in tandem with a similar Random Notes document in Google Docs) for documenting ideas on the fly without interrupting my daily life, so I really needed to maintain this quick access in my move to GitHub. Luckily, GitHub's native Android app works really well for this! You can edit the text directly with just a few taps. [For me this is just a separate markdown file that gradually accumulates new mechanics concepts.](https://github.com/trevclaridge/Writ-of-Rulers/blob/main/Design%20Notes/Misc%20Ideas.md)
+
+The best part is actually the built in feature to add a shortcut to the game's repository straight to the home screen of my phone. This saves me a few taps searching for the specific repo and gets me to documenting those ideas quicker! Not a huge thing, but a very welcome additional benefit.
+
 ## Downsides?
 
 Totally.
